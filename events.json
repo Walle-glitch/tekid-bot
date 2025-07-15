@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Teknikträff – Nätverk & Säkerhet",
+    "date": "2025-08-15",
+    "time": "18:00",
+    "location": "TEKID Discord – Kanal: #evenemang",
+    "description": "Föreläsning + diskussion om säker nätverksdesign. Gäst: Janne från Cisco."
+  },
+  {
+    "title": "Workshop – Python & API:er",
+    "date": "2025-08-22",
+    "time": "17:30",
+    "location": "Makerspace Lund",
+    "description": "Praktisk genomgång av REST API-hantering i Python. Ta med egen laptop!"
+  }
+]

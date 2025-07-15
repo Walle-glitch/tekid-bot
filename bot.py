@@ -1,23 +1,26 @@
-import os
 import discord
 from discord.ext import commands
+from dotenv import load_dotenv
+import os
 
-intents = discord.Intents.all()
-bot = commands.Bot(command_prefix='!', intents=intents)
+load_dotenv()
+TOKEN = os.getenv("DISCORD_TOKEN")
+
+intents = discord.Intents.default()
+bot = commands.Bot(command_prefix="!", intents=intents)
 
 @bot.event
 async def on_ready():
-    print(f'✅ {bot.user.name} är nu online!')
+    print(f"✅ {bot.user} är nu online!")
+    try:
+        synced = await bot.tree.sync()
+        print(f"🔁 Synkade {len(synced)} kommandon.")
+    except Exception as e:
+        print(f"⚠️ Misslyckades med att synka: {e}")
 
-@bot.command()
-async def ping(ctx):
-    await ctx.send("🏓 Pong!")
+# Ladda slash-kommandon från cogs/
+for filename in os.listdir("./cogs"):
+    if filename.endswith(".py"):
+        bot.load_extension(f"cogs.{filename[:-3]}")
 
-# Ladda cogs
-import os
-for filename in os.listdir('./cogs'):
-    if filename.endswith('.py'):
-        bot.load_extension(f'cogs.{filename[:-3]}')
-
-bot.run(os.getenv("DISCORD_TOKEN"))
-
+bot.run(TOKEN)
